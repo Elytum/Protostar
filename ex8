@@ -1,0 +1,16 @@
+Protostar Heap2:
+
+Stupid free exploit
+
+Use auth to allocate some memory for auth's structure
+	"auth Stolen"
+Then free so that malloc can allocate again at that position on that memory page
+	"reset"
+Use service to allocate again, near to old auth's structure allocation and overflow it
+	"service Stealing Protostar Sucks"
+Then just call login
+	"login"
+
+Easy, fast, stupid, protostar.
+
+c542e581c5ba5162a85f767996e3247ed619ef6c6f7b76a59435545dc6259f8a

